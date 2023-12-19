@@ -1,0 +1,466 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1600,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/ ;stackoverflow_DWH",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": ".",
+            "database": "stackoverflow_DWH"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "ServiceAccount",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "Dim_Comments",
+        "columns": [
+          {
+            "name": "comment_id",
+            "dataType": "int64",
+            "sourceColumn": "comment_id"
+          },
+          {
+            "name": "creation_date",
+            "dataType": "dateTime",
+            "sourceColumn": "creation_date"
+          },
+          {
+            "name": "comment_userid",
+            "dataType": "int64",
+            "sourceColumn": "comment_userid"
+          },
+          {
+            "name": "post_id",
+            "dataType": "int64",
+            "sourceColumn": "post_id"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ ;stackoverflow_DWH\",",
+                "    dbo_Dim_Comments = Source{[Schema=\"dbo\",Item=\"Dim_Comments\"]}[Data]",
+                "in",
+                "    dbo_Dim_Comments"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_Tags",
+        "columns": [
+          {
+            "name": "tag_id",
+            "dataType": "int64",
+            "sourceColumn": "tag_id"
+          },
+          {
+            "name": "post_id",
+            "dataType": "int64",
+            "sourceColumn": "post_id"
+          },
+          {
+            "name": "tags",
+            "dataType": "string",
+            "sourceColumn": "tags"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ ;stackoverflow_DWH\",",
+                "    dbo_Dim_Tags = Source{[Schema=\"dbo\",Item=\"Dim_Tags\"]}[Data]",
+                "in",
+                "    dbo_Dim_Tags"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_Vote",
+        "columns": [
+          {
+            "name": "vote_type_id",
+            "dataType": "int64",
+            "sourceColumn": "vote_type_id"
+          },
+          {
+            "name": "creation_date",
+            "dataType": "dateTime",
+            "sourceColumn": "creation_date"
+          },
+          {
+            "name": "vote_type",
+            "dataType": "string",
+            "sourceColumn": "vote_type"
+          },
+          {
+            "name": "post_id",
+            "dataType": "int64",
+            "sourceColumn": "post_id"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ ;stackoverflow_DWH\",",
+                "    dbo_Dim_Vote = Source{[Schema=\"dbo\",Item=\"Dim_Vote\"]}[Data]",
+                "in",
+                "    dbo_Dim_Vote"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Dim_User",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id"
+          },
+          {
+            "name": "creation_date",
+            "dataType": "dateTime",
+            "sourceColumn": "creation_date"
+          },
+          {
+            "name": "DisplayName",
+            "dataType": "string",
+            "sourceColumn": "DisplayName"
+          },
+          {
+            "name": "location",
+            "dataType": "string",
+            "sourceColumn": "location"
+          },
+          {
+            "name": "DownVotes",
+            "dataType": "int64",
+            "sourceColumn": "DownVotes"
+          },
+          {
+            "name": "UpVotes",
+            "dataType": "int64",
+            "sourceColumn": "UpVotes"
+          },
+          {
+            "name": "Reputation",
+            "dataType": "int64",
+            "sourceColumn": "Reputation"
+          },
+          {
+            "name": "views",
+            "dataType": "int64",
+            "sourceColumn": "views"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ ;stackoverflow_DWH\",",
+                "    dbo_Dim_User = Source{[Schema=\"dbo\",Item=\"Dim_User\"]}[Data]",
+                "in",
+                "    dbo_Dim_User"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimDate",
+        "columns": [
+          {
+            "name": "DateSK",
+            "dataType": "int64",
+            "sourceColumn": "DateSK"
+          },
+          {
+            "name": "Date",
+            "dataType": "dateTime",
+            "sourceColumn": "Date"
+          },
+          {
+            "name": "Day",
+            "dataType": "string",
+            "sourceColumn": "Day"
+          },
+          {
+            "name": "DaySuffix",
+            "dataType": "string",
+            "sourceColumn": "DaySuffix"
+          },
+          {
+            "name": "DayOfWeek",
+            "dataType": "string",
+            "sourceColumn": "DayOfWeek"
+          },
+          {
+            "name": "DOWInMonth",
+            "dataType": "int64",
+            "sourceColumn": "DOWInMonth"
+          },
+          {
+            "name": "DayOfYear",
+            "dataType": "int64",
+            "sourceColumn": "DayOfYear"
+          },
+          {
+            "name": "WeekOfYear",
+            "dataType": "int64",
+            "sourceColumn": "WeekOfYear"
+          },
+          {
+            "name": "WeekOfMonth",
+            "dataType": "int64",
+            "sourceColumn": "WeekOfMonth"
+          },
+          {
+            "name": "Month",
+            "dataType": "string",
+            "sourceColumn": "Month"
+          },
+          {
+            "name": "MonthName",
+            "dataType": "string",
+            "sourceColumn": "MonthName"
+          },
+          {
+            "name": "Quarter",
+            "dataType": "int64",
+            "sourceColumn": "Quarter"
+          },
+          {
+            "name": "QuarterName",
+            "dataType": "string",
+            "sourceColumn": "QuarterName"
+          },
+          {
+            "name": "Year",
+            "dataType": "string",
+            "sourceColumn": "Year"
+          },
+          {
+            "name": "StandardDate",
+            "dataType": "string",
+            "sourceColumn": "StandardDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ ;stackoverflow_DWH\",",
+                "    dbo_DimDate = Source{[Schema=\"dbo\",Item=\"DimDate\"]}[Data]",
+                "in",
+                "    dbo_DimDate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Fact_Post",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id"
+          },
+          {
+            "name": "post_type",
+            "dataType": "string",
+            "sourceColumn": "post_type"
+          },
+          {
+            "name": "creation_date",
+            "dataType": "dateTime",
+            "sourceColumn": "creation_date"
+          },
+          {
+            "name": "answer_count",
+            "dataType": "int64",
+            "sourceColumn": "answer_count"
+          },
+          {
+            "name": "comment_count",
+            "dataType": "int64",
+            "sourceColumn": "comment_count"
+          },
+          {
+            "name": "view_count",
+            "dataType": "int64",
+            "sourceColumn": "view_count"
+          },
+          {
+            "name": "favourite_count",
+            "dataType": "int64",
+            "sourceColumn": "favourite_count"
+          },
+          {
+            "name": "bounty_amount",
+            "dataType": "int64",
+            "sourceColumn": "bounty_amount"
+          },
+          {
+            "name": "comments_score",
+            "dataType": "int64",
+            "sourceColumn": "comments_score"
+          },
+          {
+            "name": "userid",
+            "dataType": "int64",
+            "sourceColumn": "userid"
+          },
+          {
+            "name": "DateK",
+            "dataType": "int64",
+            "sourceColumn": "DateK"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ ;stackoverflow_DWH\",",
+                "    dbo_Fact_Post = Source{[Schema=\"dbo\",Item=\"Fact_Post\"]}[Data]",
+                "in",
+                "    dbo_Fact_Post"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "User_Badge",
+        "columns": [
+          {
+            "name": "badge_id",
+            "dataType": "int64",
+            "sourceColumn": "badge_id"
+          },
+          {
+            "name": "badge_name",
+            "dataType": "string",
+            "sourceColumn": "badge_name"
+          },
+          {
+            "name": "badge_userid",
+            "dataType": "int64",
+            "sourceColumn": "badge_userid"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ ;stackoverflow_DWH\",",
+                "    dbo_User_Badge = Source{[Schema=\"dbo\",Item=\"User_Badge\"]}[Data]",
+                "in",
+                "    dbo_User_Badge"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "1099ece1-cfac-4f93-96be-e05689f24ae8",
+        "fromTable": "Dim_Comments",
+        "fromColumn": "post_id",
+        "toTable": "Fact_Post",
+        "toColumn": "id"
+      },
+      {
+        "name": "afdd5c04-bb10-4e39-aba1-e90374cbcd22",
+        "fromTable": "Dim_Tags",
+        "fromColumn": "post_id",
+        "toTable": "Fact_Post",
+        "toColumn": "id"
+      },
+      {
+        "name": "7c25c668-142d-4cf8-b4cf-8f69294bbe91",
+        "fromTable": "Dim_Vote",
+        "fromColumn": "post_id",
+        "toTable": "Fact_Post",
+        "toColumn": "id"
+      },
+      {
+        "name": "7a6d2780-f416-44f9-a4f1-2cc03c095db9",
+        "fromTable": "Fact_Post",
+        "fromColumn": "userid",
+        "toTable": "Dim_User",
+        "toColumn": "id"
+      },
+      {
+        "name": "b0b10050-8cbb-49ab-b1e1-714ef3b9e951",
+        "fromTable": "User_Badge",
+        "fromColumn": "badge_userid",
+        "toTable": "Dim_User",
+        "toColumn": "id"
+      },
+      {
+        "name": "13593207-78fa-4a00-a341-3fa11e75fb07",
+        "fromTable": "Fact_Post",
+        "fromColumn": "DateK",
+        "toTable": "DimDate",
+        "toColumn": "DateSK"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "700"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}

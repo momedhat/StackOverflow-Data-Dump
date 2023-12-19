@@ -1,0 +1,8 @@
+C:\Users\dell\source\repos\TabularProject1\bin\Model.asdatabase
+C:\Users\dell\source\repos\TabularProject1\bin\Model.deploymenttargets
+C:\Users\dell\source\repos\TabularProject1\bin\Model.deploymentoptions
+C:\Users\dell\source\repos\TabularProject1\obj\Development\TabularProject1.smproj.AssemblyReference.cache
+C:\Users\dell\source\repos\TabularProject1\obj\Development\TabularProject1.smproj.CoreCompileInputs.cache
+C:\Users\dell\source\repos\TabularProject1\obj\Development\Model.asdatabase
+C:\Users\dell\source\repos\TabularProject1\obj\Development\Model.deploymentoptions
+C:\Users\dell\source\repos\TabularProject1\obj\Development\Model.deploymenttargets
